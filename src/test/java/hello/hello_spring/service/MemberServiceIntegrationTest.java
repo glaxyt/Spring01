@@ -7,24 +7,19 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import hello.hello_spring.domain.Member;
+import hello.hello_spring.repository.MemberRepository;
 import hello.hello_spring.repository.MemoryMemberRepository;
 
-class MemberServiceTest {
-	MemberService memberService;
-	MemoryMemberRepository memberRepository;
-
-	@BeforeEach
-	public void beforeEach() {
-		memberRepository = new MemoryMemberRepository();
-		memberService = new MemberService(memberRepository);
-	}
-
-	@AfterEach
-	public void afterEach() {
-		memberRepository.clearStore();
-	}
+@SpringBootTest
+@Transactional
+	class MemberServiceIntegrationTest {
+	@Autowired MemberService memberService;
+	@Autowired MemberRepository memberRepository;
 
 	@Test
 	void 회원가입() {
@@ -64,13 +59,5 @@ class MemberServiceTest {
 		// }
 
 		//then
-	}
-
-	@Test
-	void findMembers() {
-	}
-
-	@Test
-	void findOne() {
 	}
 }
